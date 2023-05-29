@@ -6,6 +6,7 @@ module.exports = {
   ],
   theme: {
     extend: {
+      // fix font family
       fontFamily: {
         satoshi: ['Satoshi', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
