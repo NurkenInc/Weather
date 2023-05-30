@@ -13,7 +13,7 @@ export default function Navbar() {
           width={40}
           height={40}
         />
-        <h3 className='font-bold'>Weather</h3>
+        <h3 className='font-bold font-inter'>Weather</h3>
       </div>
       <div className='flex-center'>
         {isSignedIn ? (
