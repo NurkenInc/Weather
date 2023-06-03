@@ -1,6 +1,8 @@
-import { SessionProvider } from 'next-auth/react';
 import Navbar from '@components/Basic/Navbar';
+import Provider from '@components/Basic/Provider';
+
 import { LayoutProps } from '@shared/types/layout';
+
 import '@styles/globals.css';
 
 export const metadata = {
@@ -12,7 +14,7 @@ export default function RootLayout({ children } : LayoutProps) {
   return (
     <html lang='en'>
       <body>
-        <SessionProvider>
+        <Provider>
           <div className='main'>
             <div className='gradient'></div>
           </div>
@@ -22,7 +24,7 @@ export default function RootLayout({ children } : LayoutProps) {
           <main className='app'>
             {children}
           </main>
-        </SessionProvider>
+        </Provider>
       </body>
     </html>
   )
