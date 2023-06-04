@@ -1,10 +1,10 @@
-import NextAuth from 'next-auth';
+import NextAuth, { Awaitable, Profile } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
 import User from '@models/user';
 import { connectToDB } from '@utils/database';
+import { getErrorMessage } from '@utils/error';
 import { SessionProps, SignInProps } from '@shared/types/callbacks';
-import { ErrorWithMessage } from '@shared/types/error';
 
 const handler = NextAuth({
   providers: [
@@ -19,28 +19,29 @@ const handler = NextAuth({
       session!.user.id = sessionUser._id.toString();
       
       return session;
-    }
-  },
-  async signIn({ account, profile, user }: SignInProps) {
-    try {
-      await  connectToDB();
+    },
+    // fix type
+    async signIn({ profile }: any) {
+      try {
+        await  connectToDB();
 
-      const userExists = await User.findOne({ email: profile.email });
+        const userExists = await User.findOne({ email: profile.email });
 
-      if(!userExists) {
-        await User.create({
-          email: profile.email,
-          username: profile.name?.replace(" ", "").toLowerCase(),
-          image: profile.picture,
-        });
+        if(!userExists) {
+          await User.create({
+            email: profile.email,
+            username: profile.name?.replace(" ", "").toLowerCase(),
+            image: profile.picture,
+          });
+        }
+        
+        return true;
+      } catch (error) {
+        console.log("Error checking if user exists: ", getErrorMessage(error));
+        return false;
       }
-
-      return true;
-    } catch (error) {
-      console.log("Error checking if user exists: ", error.message);
-      return false;
-    }
-  }
+    },
+  },
 })
 
 export { handler as GET, handler as POST };
