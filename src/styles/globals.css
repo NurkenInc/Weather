@@ -19,16 +19,40 @@
   background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
 }
 
+.hero-gradient {
+  background: -webkit-linear-gradient(270deg, #357bbb, #ff65ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-weather {
+  background: -webkit-linear-gradient(90deg, #3F2B96 0%, #A8C0FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .app {
   @apply relative z-10 flex flex-col justify-center items-center max-w-7xl mx-auto;
 }
 
 .navbar {
-  @apply relative w-full z-10 flex justify-between items-center;
+  @apply relative w-full z-10 flex justify-between items-center max-w-7xl px-1 sm:px-5 mx-auto py-1;
+}
+
+.hero {
+  @apply font-bold text-[35px] font-inter text-center;
 }
 
 .flex-center {
   @apply flex justify-center items-center;
+}
+
+.flex-between {
+  @apply flex justify-between items-center;
+}
+
+.flex-end {
+  @apply flex justify-end items-center;
 }
 
 .btn {
